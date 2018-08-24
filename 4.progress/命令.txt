@@ -1,0 +1,2 @@
+查看最大进程
+cat /proc/sys/kernel/pid_max
