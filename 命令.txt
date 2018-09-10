@@ -1,0 +1,22 @@
+
+1.查找进程
+	ps aux|grep 01ararm
+	
+2.杀死进程
+	killall 07sigstaus //杀死 07sigstaus 进程
+	
+3.cat
+	不带任何参数表示为从标准输入读取数据，输出到标准输出
+4.获得一些限制信息，比如文件描述符最大值
+	ulimit -a
+5.查看系统支持打开最大文件数	
+	cat /proc/sys/fs/file-max  
+6.队列属性信息路径
+		/proc/sys/fs/mqueue
+7.创建文件
+	touch a.c
+8.查看最大进程
+	cat /proc/sys/kernel/pid_max
+
+	ps -ef
+		

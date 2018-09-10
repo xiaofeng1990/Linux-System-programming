@@ -1,0 +1,4 @@
+---- FOPEN_MAX Matches (3 in 2 files) ----
+stdio.h (include) line 162 :    FOPEN_MAX	Minimum number of files that can be open at once.
+stdio_lim.h (include\bits) line 36 : # undef  FOPEN_MAX
+stdio_lim.h (include\bits) line 37 : # define FOPEN_MAX 16

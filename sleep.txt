@@ -1,0 +1,64 @@
+
+	睡眠n秒
+	unsigned int sleep(unsigned int seconds);
+	睡眠微妙
+	int usleep(useconds_t usec);
+	睡眠纳秒
+	int nanosleep(const struct timespec *req, struct timespec *rem);
+
+	time_t 单位秒
+
+	struct timeval {
+		long    tv_sec;         /* seconds */
+		long    tv_usec;        /* microseconds */
+	};
+
+	struct timespec {
+		time_t tv_sec;        /* seconds */
+		long   tv_nsec;       /* nanoseconds */
+	};
+
+
+	sleep(n) //睡眠n秒，返回值为剩余秒数，因为可能被睡眠信号打断
+
+	/* 以下方法确切睡眠n秒钟 */
+	do{
+		n = sleep(n);
+	}while(n>0)
+
+	while(n = sleep(n))
+
+	setitimer
+
+	包含头文件<sys/time.h> 
+		功能setitimer()比alarm功能强大，支持3种类型的定时器
+	原型：
+		int setitimer(int which, const struct itimerval *value, struct itimerval *ovalue));
+		参数
+		第一个参数which指定定时器类型
+		第二个参数是结构itimerval的一个实例，结构itimerval形式
+		第三个参数可不做处理。返回当前始终剩余时间
+		返回值:成功返回0失败返回-1
+
+		ITIMER_REAL：经过指定的时间后，内核将发送SIGALRM信号给本进程 
+		ITIMER_VIRTUAL ：程序在用户空间执行指定的时间后，内核将发送SIGVTALRM信号给本进程 
+		ITIMER_PROF ：进程在内核空间中执行时，时间计数会减少，通常与ITIMER_VIRTUAL共用，
+					代表进程在用户空间与内核空间中运行指定时间后，内核将发送SIGPROF信号给本进程。
+		 struct itimerval {
+				   struct timeval it_interval; /* next value */		//下一次始终间隔
+				   struct timeval it_value;    /* current value */	//第一次时钟时间
+			   };
+
+			   struct timeval {
+				   time_t      tv_sec;         /* seconds */
+				   suseconds_t tv_usec;        /* microseconds */
+			   };
+
+	//获得定时剩余时间		   
+	getitimer(ITIMER_REAL, &it);
+	
+	格式化时间
+	time_info = localtime(&sbuf.st_mtime);
+		   
+	strftime(time_buf, sizeof(time_buf), "%b %d %R", time_info);
+	printf("%s  ", time_buf);
